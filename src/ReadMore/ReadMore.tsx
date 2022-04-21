@@ -11,7 +11,7 @@ const ReadMore = ({children}: { children: string }) => {
 		<ReadMoreContainer>
 			{openReadMore ? text : text.slice(0, 100)}
 			<ReadOrHide
-				onClick={toggleReadMore}>{text.length < 100 ? "" : openReadMore ? "Show Less" : "...Read More"}</ReadOrHide>
+				onClick={toggleReadMore}>{text.length < 100 ? "" : openReadMore ? "Show Less" : "... Read More"}</ReadOrHide>
 		</ReadMoreContainer>
 	)
 }

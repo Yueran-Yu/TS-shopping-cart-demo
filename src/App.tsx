@@ -49,14 +49,14 @@ const App = () => {
 				</Badge>
 			</StyledButton>
 			<Grid container spacing={3}>
-				{data && data.slice(1, 39).map(item =>
+				{data && data.slice(2, 35).map(item =>
 					item.image_link && <Grid item key={item.id} xs={12} sm={4}>
             <Item item={item} handleAddToCart={handleAddToCart}/>
           </Grid>
 				)}
 			</Grid>
 		</Wrapper>
-	);
+	)
 }
 
 export default App;
