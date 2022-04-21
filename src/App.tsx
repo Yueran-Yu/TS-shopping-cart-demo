@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useQuery} from "react-query";
 import Drawer from '@material-ui/core/Drawer'
-import LinearProgress from '@material-ui/core/LinearProgress'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import Grid from '@material-ui/core/Grid'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import Badge from '@material-ui/core/Badge'
-import {StyledButton, Wrapper} from './styles';
+import {CircleProcess, StyledButton, Wrapper} from './styles';
 import Item from "./Item/Item";
 
 
@@ -32,11 +32,14 @@ const App = () => {
 	// 		.finally(() => setLoading(false))
 	// }, [])
 
-	const getTotalItems = (cartItems: ProductProps[]) => {}
+
+	const getTotalItems = (cartItems: ProductProps[]) => {
+
+	}
 	const handleAddToCart = (addItemToCart: ProductProps) => {}
 	const handleRemoveFromCart = () => {}
 
-	if (isLoading) return <LinearProgress/>
+	if (isLoading) return <CircleProcess><CircularProgress style={{height: "10vw", width: "10vw"}}/></CircleProcess>
 	if (error) return <div>Something went wrong...</div>
 
 	return (
