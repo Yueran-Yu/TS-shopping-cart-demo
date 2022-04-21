@@ -34,7 +34,6 @@ export const AddItemBtn = styled(Button)`
 	
 `
 
-
 export const ColorContainer = styled.p<HasColor>`
   min-height: ${({hasColor}) => hasColor ? '50px' : ''};
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px 0;

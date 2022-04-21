@@ -1,5 +1,7 @@
 - ★★★Material-UI/core
 - Material-UI/icons
-- react-query 
+- react-query
 - Came a hard problem, how to type axios, or fetch, or async& await, promise, it's hard to me
-- read more function 
+- read more function
+- useContext/ useReducer
+- localStorage

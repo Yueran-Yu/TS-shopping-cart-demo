@@ -8,6 +8,17 @@ import Badge from '@material-ui/core/Badge'
 import {CircleProcess, StyledButton, Wrapper} from './styles';
 import Item from "./Item/Item";
 
+const CircleStyle = {
+	height: "10vw",
+	width: "10vw",
+	position: "absolute",
+	margin: "auto",
+	left: "0",
+	right: "0",
+	top: "0",
+	bottom: "0",
+	textAlign: "center"
+} as React.CSSProperties;
 
 const fetchProducts = async (): Promise<ProductProps[]> =>
 	await (await fetch("https://makeup-api.herokuapp.com/api/v1/products.json?product_type=blush&price_greater_than=15")).json()
@@ -39,27 +50,32 @@ const App = () => {
 	const handleAddToCart = (addItemToCart: ProductProps) => {}
 	const handleRemoveFromCart = () => {}
 
-	if (isLoading) return <CircleProcess><CircularProgress style={{height: "10vw", width: "10vw"}}/></CircleProcess>
 	if (error) return <div>Something went wrong...</div>
 
 	return (
-		<Wrapper>
-			<Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>Cart Something Happening here
-			</Drawer>
-			<StyledButton onClick={() => setCartOpen(true)}>
-				<Badge badgeContent={() => getTotalItems(cartItems)}>
-					<AddShoppingCartIcon/>
-				</Badge>
-			</StyledButton>
-			<Grid container spacing={3}>
-				{data && data.slice(2, 35).map(item =>
-					item.image_link && <Grid item key={item.id} xs={12} sm={4}>
-            <Item item={item} handleAddToCart={handleAddToCart}/>
-          </Grid>
-				)}
-			</Grid>
-		</Wrapper>
+		<>
+			{isLoading ?
+				<CircularProgress style={CircleStyle}/>
+				:
+				<Wrapper>
+					<Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>Cart Something Happening here
+					</Drawer>
+					<StyledButton onClick={() => setCartOpen(true)}>
+						<Badge badgeContent={() => getTotalItems(cartItems)}>
+							<AddShoppingCartIcon/>
+						</Badge>
+					</StyledButton>
+					<Grid container spacing={3}>
+						{data && data.slice(2, 35).map(item =>
+							item.image_link && <Grid item key={item.id} xs={12} sm={4}>
+                <Item item={item} handleAddToCart={handleAddToCart}/>
+              </Grid>
+						)}
+					</Grid>
+				</Wrapper>
+			}
+		</>
 	)
 }
 
-export default App;
+export default App
