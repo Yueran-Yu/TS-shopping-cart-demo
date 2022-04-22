@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useQuery} from "react-query";
 import Drawer from '@material-ui/core/Drawer'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -6,21 +6,9 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import CloseIcon from '@material-ui/icons/Close';
 import Grid from '@material-ui/core/Grid'
 import Badge from '@material-ui/core/Badge'
-import {CloseBtn, StyledButton, Wrapper} from './styles';
-import Item from "./Item/Item";
+import {CircleStyle, CloseBtn, StyledButton, Wrapper} from './styles';
+import Product from "./Product/Product";
 import Cart from "./Cart/Cart";
-
-const CircleStyle = {
-	height: "10vw",
-	width: "10vw",
-	position: "absolute",
-	margin: "auto",
-	left: "0",
-	right: "0",
-	top: "0",
-	bottom: "0",
-	textAlign: "center"
-} as React.CSSProperties;
 
 const fetchProducts = async (): Promise<ProductProps[]> =>
 	await (await fetch("https://makeup-api.herokuapp.com/api/v1/products.json?product_type=blush&price_greater_than=15")).json()
@@ -49,20 +37,22 @@ const App = () => {
 	const getTotalItems = (items: CartItem[]) =>
 		items.reduce((prev: number, currentItem) => prev + currentItem.amount, 0)
 
+
 	const handleAddToCart = (itemToCart: CartItem) => {
 		setCartItems(cartItems => {
 			const isItemExistInCart = cartItems.find(item => item.id === itemToCart.id)
 			if (isItemExistInCart) {
 				return cartItems.map(item => (item.id === itemToCart.id ? {...item, amount: item.amount + 1} : item))
 			}
-
 			return [...cartItems, {...itemToCart, amount: 1}]
 		})
 	}
-	const handleRemoveFromCart = () => {}
+
+	const handleRemoveFromCart = (id: number) => {
+
+	}
 
 	if (error) return <div>Something went wrong...</div>
-
 	return (
 		<>
 			{isLoading ?
@@ -84,9 +74,9 @@ const App = () => {
 						</Badge>
 					</StyledButton>
 					<Grid container spacing={3}>
-						{data && data.slice(2, 35).map(item =>
+						{data && data.slice(3, 36).map(item =>
 							item.image_link && <Grid item key={item.id} xs={12} sm={4}>
-                <Item item={item} handleAddToCart={handleAddToCart}/>
+                <Product item={item} handleAddToCart={handleAddToCart}/>
               </Grid>
 						)}
 					</Grid>

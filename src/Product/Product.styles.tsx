@@ -31,15 +31,14 @@ export const AddItemBtn = styled(Button)`
   color: #86550c;
 	font-size: 0.8rem;
 	line-height: 40px;
-	
 `
 
 export const ColorContainer = styled.p<HasColor>`
   min-height: ${({hasColor}) => hasColor ? '50px' : ''};
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px 0;
+	padding: 0 10px;
   margin-top: 40px;
 `
-
 
 export const ColorText = styled.p<HasColor>`
   font-family: "Andale Mono", sans-serif;
@@ -66,7 +65,7 @@ export const ColorBox = styled.span<ItemColor>`
   margin: 5px 4px 3px 4px;
   cursor: pointer;
   background-color: ${({name}) => name};
-  outline: ${({selected}) => selected ? "solid 2px grey" : "none"};
+  outline: ${({selected}) => selected ? "solid 2px #cdd0d4" : "none"};
   outline-offset: 3px;
 
 `

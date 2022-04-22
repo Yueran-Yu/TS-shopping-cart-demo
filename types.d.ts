@@ -1,15 +1,6 @@
-interface ProductColors {
+interface ProductColor {
 	hex_value: string
 	colour_name: string
-}
-
-interface CartItem extends ProductProps {
-	product_color: ProductColors
-
-}
-
-interface ProductProps extends ProductsBaseProps {
-	product_colors: ProductColors[]
 }
 
 interface ProductsBaseProps {
@@ -24,29 +15,40 @@ interface ProductsBaseProps {
 	brand: string
 }
 
+interface CartItem extends ProductsBaseProps {
+	product_color: ProductColor
+}
+
+interface ProductProps extends ProductsBaseProps {
+	product_colors: ProductColor[]
+}
+
 type ItemProps = {
 	item: ProductProps
 	handleAddToCart: (addItemToCart: CartItem) => void
+	// handleMouseEnter: (e: React.MouseEvent<HTMLSpanElement>, hex: string) => void
+	// handleMouseLeave: () => void
+	// handleOnClickColor: () => void
 }
 
 interface ItemColor {
 	name: string
 	value: string
-	selected:boolean
+	selected: boolean
 }
 
 interface HasColor {
 	hasColor: boolean
 }
 
-interface CartItemProps{
+interface CartItemProps {
 	item: CartItem
-	addToCart:(clickedItem:CartItem)=>void
-	removeFormCart: (id:number)=>void
+	addToCart: (clickedItem: CartItem) => void
+	removeFormCart: (id: number) => void
 }
 
-interface CartProps{
+interface CartProps {
 	cartItems: CartItem[]
-	addToCart:(clickedItem:CartItem)=>void
-	removeFormCart: (id:number)=>void
+	addToCart: (clickedItem: CartItem) => void
+	removeFormCart: (id: number) => void
 }

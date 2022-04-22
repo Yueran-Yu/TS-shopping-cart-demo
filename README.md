@@ -6,3 +6,4 @@
 - useContext/ useReducer
 - localStorage
 - Add item with certain color selected, the type of item in the cart is different from the product type
+- imitate and implement Sephora's color selection function (seems the tricky logic for me)
