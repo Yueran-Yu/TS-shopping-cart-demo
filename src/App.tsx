@@ -2,11 +2,13 @@ import React, {useState} from 'react';
 import {useQuery} from "react-query";
 import Drawer from '@material-ui/core/Drawer'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import Grid from '@material-ui/core/Grid'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
+import CloseIcon from '@material-ui/icons/Close';
+import Grid from '@material-ui/core/Grid'
 import Badge from '@material-ui/core/Badge'
-import {CircleProcess, StyledButton, Wrapper} from './styles';
+import {CloseBtn, StyledButton, Wrapper} from './styles';
 import Item from "./Item/Item";
+import Cart from "./Cart/Cart";
 
 const CircleStyle = {
 	height: "10vw",
@@ -25,7 +27,7 @@ const fetchProducts = async (): Promise<ProductProps[]> =>
 
 const App = () => {
 	const [cartOpen, setCartOpen] = useState(false)
-	const [cartItems, setCartItems] = useState<ProductProps[]>([])
+	const [cartItems, setCartItems] = useState<CartItem[]>([])
 	const {data, isLoading, error} = useQuery<ProductProps[]>("products", fetchProducts)
 
 	// const [loading, setLoading] = useState(false)
@@ -44,10 +46,19 @@ const App = () => {
 	// }, [])
 
 
-	const getTotalItems = (cartItems: ProductProps[]) => {
+	const getTotalItems = (items: CartItem[]) =>
+		items.reduce((prev: number, currentItem) => prev + currentItem.amount, 0)
 
+	const handleAddToCart = (itemToCart: CartItem) => {
+		setCartItems(cartItems => {
+			const isItemExistInCart = cartItems.find(item => item.id === itemToCart.id)
+			if (isItemExistInCart) {
+				return cartItems.map(item => (item.id === itemToCart.id ? {...item, amount: item.amount + 1} : item))
+			}
+
+			return [...cartItems, {...itemToCart, amount: 1}]
+		})
 	}
-	const handleAddToCart = (addItemToCart: ProductProps) => {}
 	const handleRemoveFromCart = () => {}
 
 	if (error) return <div>Something went wrong...</div>
@@ -58,7 +69,14 @@ const App = () => {
 				<CircularProgress style={CircleStyle}/>
 				:
 				<Wrapper>
-					<Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>Cart Something Happening here
+					<Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
+						<CloseBtn aria-label="close" onClick={() => setCartOpen(false)}>
+							<CloseIcon/>
+						</CloseBtn>
+						<Cart
+							cartItems={cartItems}
+							addToCart={handleAddToCart}
+							removeFormCart={handleRemoveFromCart}/>
 					</Drawer>
 					<StyledButton onClick={() => setCartOpen(true)}>
 						<Badge badgeContent={() => getTotalItems(cartItems)}>

@@ -47,7 +47,7 @@ const Item: FC<ItemProps> = ({item, handleAddToCart}) => {
 					</ColorContainer>
 					<h3>${item.price}</h3>
 				</div>
-				<AddItemBtn onClick={() => handleAddToCart(item)}>Add to cart</AddItemBtn>
+				<AddItemBtn>Add to cart</AddItemBtn>
 			</ItemContainer>
 		);
 	}

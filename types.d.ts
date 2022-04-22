@@ -3,8 +3,8 @@ interface ProductColors {
 	colour_name: string
 }
 
-interface CartItemsWithColor extends ProductProps {
-	product_colors: ProductColors
+interface CartItem extends ProductProps {
+	product_color: ProductColors
 
 }
 
@@ -26,7 +26,7 @@ interface ProductsBaseProps {
 
 type ItemProps = {
 	item: ProductProps
-	handleAddToCart: (addItemToCart: ProductProps) => void
+	handleAddToCart: (addItemToCart: CartItem) => void
 }
 
 interface ItemColor {
@@ -37,4 +37,16 @@ interface ItemColor {
 
 interface HasColor {
 	hasColor: boolean
+}
+
+interface CartItemProps{
+	item: CartItem
+	addToCart:(clickedItem:CartItem)=>void
+	removeFormCart: (id:number)=>void
+}
+
+interface CartProps{
+	cartItems: CartItem[]
+	addToCart:(clickedItem:CartItem)=>void
+	removeFormCart: (id:number)=>void
 }
