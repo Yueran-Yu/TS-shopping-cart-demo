@@ -1,12 +1,14 @@
 import React, {FC, MouseEvent, useEffect, useMemo, useState} from 'react';
 import {AddItemBtn, ColorBox, ColorContainer, ColorText, ItemContainer} from './Product.styles';
 import ReadMore from "../ReadMore/ReadMore";
+import {useProductContext} from "../Context/ContextProvider";
 
-const Product: FC<ItemProps> = ({item, handleAddToCart}) => {
+const Product: FC<ItemProps> = ({item}) => {
 		const [hoverColor, setHoverColor] = useState<ProductColor>({hex_value: '', colour_name: ''})
 		const [selectedColor, setSelectedColor] = useState<ProductColor>({hex_value: '', colour_name: ''})
 		const [hasColor,] = useState(item.product_colors.length > 0)
 		const [hovered, setHovered] = useState<boolean>(false)
+		const {handleAddToCart} = useProductContext()
 
 
 		const initCartItemMemo = useMemo(() => {

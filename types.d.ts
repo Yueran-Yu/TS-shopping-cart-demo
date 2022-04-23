@@ -23,10 +23,6 @@ interface ProductProps extends ProductsBaseProps {
 
 type ItemProps = {
 	item: ProductProps
-	handleAddToCart: (addItemToCart: CartItem) => void
-	// handleMouseEnter: (e: React.MouseEvent<HTMLSpanElement>, hex: string) => void
-	// handleMouseLeave: () => void
-	// handleOnClickColor: () => void
 }
 
 interface StyledProductColor {
@@ -45,11 +41,17 @@ interface CartFunctionsProps {
 	removeFormCart: (id: number, productColor: ProductColor) => void
 }
 
-interface CartItemProps extends CartFunctionsProps {
+interface CartItemProps {
 	item: CartItem
 }
 
-interface CartProps extends CartFunctionsProps {
-	cartItems: CartItem[]
-}
 
+interface ContextProps {
+	cartItems: CartItem[]
+	setCartItems: React.Dispatch<CartItem[]>
+	data: ProductProps[] | undefined
+	isLoading: boolean
+	error:unknown
+	handleAddToCart: (selectedItem: CartItem) => void
+	handleRemoveFromCart: (id: number, productColor: ProductColor) => void
+}
