@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 
 export const CartItemContainer = styled.div`
-  background-color: pink;
   display: flex;
   justify-content: space-between;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #fff9ee;
   border-bottom: 20px;
+  padding: 0 15px 15px 15px;
+  margin-top: 10px;
 
   div {
     flex: 1;
@@ -19,6 +21,6 @@ export const CartItemContainer = styled.div`
   img {
     max-width: 80px;
     object-fit: cover;
-		margin-left: 40px;
+    margin-left: 40px;
   }
 `

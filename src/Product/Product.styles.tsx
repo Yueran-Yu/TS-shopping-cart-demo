@@ -34,7 +34,7 @@ export const AddItemBtn = styled(Button)`
   line-height: 40px;
 `
 
-export const ColorContainer = styled.p<StyledHasColor>`
+export const ColorContainer = styled.div<StyledHasColor>`
   min-height: ${({hasColor}) => hasColor ? '50px' : ''};
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px 0;
   padding: 0 10px;

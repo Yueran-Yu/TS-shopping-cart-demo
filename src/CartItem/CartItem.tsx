@@ -17,7 +17,7 @@ const CartItem: FC<CartItemProps> = ({item, addToCart, removeFormCart}) => {
 						size="small"
 						disableElevation
 						variant="contained"
-						onClick={() => removeFormCart(item.id)}>-
+						onClick={() => removeFormCart(item.id, item.product_color)}>-
 					</Button>
 					<p>{item.amount}</p>
 					<Button

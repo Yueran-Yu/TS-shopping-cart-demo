@@ -8,19 +8,22 @@ const Product: FC<ItemProps> = ({item, handleAddToCart}) => {
 		const [hasColor,] = useState(item.product_colors.length > 0)
 		const [hovered, setHovered] = useState<boolean>(false)
 
-		const setCartItem = (p: ProductColor) => {
-			return {
-				id: item.id,
-				category: item.category,
-				name: item.name,
-				description: item.description,
-				image_link: item.image_link,
-				price: item.price,
-				amount: item.amount,
-				product_color: p
+
+		const initCartItemMemo = useMemo(() => {
+			const createCartItem = (prodColor: ProductColor) => {
+				return {
+					id: item.id,
+					category: item.category,
+					name: item.name,
+					description: item.description,
+					image_link: item.image_link,
+					price: item.price,
+					amount: item.amount,
+					product_color: prodColor
+				}
 			}
-		}
-		const initCartItemMemo = useMemo(() => setCartItem(selectedColor), [setCartItem,selectedColor])
+			return createCartItem(selectedColor)
+		}, [item.amount, item.category, item.description, item.id, item.image_link, item.name, item.price, selectedColor])
 
 
 		useEffect(() => {

@@ -1,17 +1,26 @@
 import React, {FC} from 'react';
-import {CartContainer} from './Cart.styles';
+import {CartContainer, TotalPayment} from './Cart.styles';
 import CartItem from "../CartItem/CartItem";
 
 const Cart: FC<CartProps> = ({cartItems, addToCart, removeFormCart}) => {
+
+	const totalPayment = cartItems.reduce(
+		(prev: number, currentItem: CartItem) => {
+			return prev + currentItem.amount * currentItem.price
+		}, 0)
 	return (
 		<CartContainer>
-			<h2>Your Shopping Cart</h2>
+			<h2 className="cartTitle">Your Shopping Cart</h2>
 			{cartItems.length === 0 ? <p>No items in cart.</p> : ""}
 			{cartItems.map(item =>
-				<CartItem key={item.id}
+				<CartItem key={item.id + item.product_color.hex_value}
 									item={item}
 									addToCart={addToCart}
 									removeFormCart={removeFormCart}/>)}
+
+			{
+				<TotalPayment>Total: ${totalPayment.toFixed(2)}</TotalPayment>
+			}
 		</CartContainer>
 	)
 }

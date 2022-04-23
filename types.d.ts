@@ -32,7 +32,7 @@ type ItemProps = {
 interface StyledProductColor {
 	name: string
 	value: string
-	hovered:boolean
+	hovered: boolean
 	selected: boolean
 }
 
@@ -42,7 +42,7 @@ interface StyledHasColor {
 
 interface CartFunctionsProps {
 	addToCart: (selectedItem: CartItem) => void
-	removeFormCart: (id: number) => void
+	removeFormCart: (id: number, productColor: ProductColor) => void
 }
 
 interface CartItemProps extends CartFunctionsProps {
