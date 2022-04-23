@@ -5,7 +5,6 @@ import React from "react";
 export const Wrapper = styled.div`
   margin: 70px 60px;
 `
-
 export const StyledButton = styled(IconButton)`
   position: fixed;
   z-index: 100;

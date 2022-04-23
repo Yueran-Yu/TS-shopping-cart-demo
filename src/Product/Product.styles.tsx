@@ -10,6 +10,7 @@ export const ItemContainer = styled.div`
   height: 100%;
   color: grey;
   box-shadow: rgb(29, 45, 50, 0.1) 0 4px 12px;
+
   img {
     max-height: 250px;
     object-fit: cover;
@@ -17,7 +18,7 @@ export const ItemContainer = styled.div`
 
   div {
     font-family: Arial, Helvetica, sans-serif;
-    padding:0 1rem;
+    padding: 0 1rem;
   }
 
   h3 {
@@ -29,18 +30,18 @@ export const AddItemBtn = styled(Button)`
   border-radius: 0 0 20px 20px;
   font-family: "Arial Black", serif;
   color: #86550c;
-	font-size: 0.8rem;
-	line-height: 40px;
+  font-size: 0.8rem;
+  line-height: 40px;
 `
 
-export const ColorContainer = styled.p<HasColor>`
+export const ColorContainer = styled.p<StyledHasColor>`
   min-height: ${({hasColor}) => hasColor ? '50px' : ''};
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px 0;
-	padding: 0 10px;
+  padding: 0 10px;
   margin-top: 40px;
 `
 
-export const ColorText = styled.p<HasColor>`
+export const ColorText = styled.p<StyledHasColor>`
   font-family: "Andale Mono", sans-serif;
   color: #2b2b2b;
   font-size: 0.8rem;
@@ -57,7 +58,7 @@ export const ColorText = styled.p<HasColor>`
     background-color: wheat;
   }
 `
-export const ColorBox = styled.span<ItemColor>`
+export const ColorBox = styled.span<StyledProductColor>`
   display: inline-block;
   height: 20px;
   width: 20px;
@@ -65,7 +66,7 @@ export const ColorBox = styled.span<ItemColor>`
   margin: 5px 4px 3px 4px;
   cursor: pointer;
   background-color: ${({name}) => name};
-  outline: ${({selected}) => selected ? "solid 2px #cdd0d4" : "none"};
+  outline: ${({selected, hovered}) => selected ? "solid 2px black" : (hovered ? "solid 2px green" : "none")};
   outline-offset: 3px;
 
 `

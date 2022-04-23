@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useQuery} from "react-query";
 import Drawer from '@material-ui/core/Drawer'
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -15,30 +15,18 @@ const fetchProducts = async (): Promise<ProductProps[]> =>
 
 const App = () => {
 	const [cartOpen, setCartOpen] = useState(false)
+	const [selectedColor, setSelectedColor] = useState<ProductColor | null>(null)
 	const [cartItems, setCartItems] = useState<CartItem[]>([])
 	const {data, isLoading, error} = useQuery<ProductProps[]>("products", fetchProducts)
-
-	// const [loading, setLoading] = useState(false)
-	// const [_data, setData] = useState<ProductProps[]>([])
-	// const [_error, setError] = useState(false)
-	// useEffect(() => {
-	// 	setLoading(true)
-	// 	axios
-	// 		.get<ProductProps[]>("https://makeup-api.herokuapp.com/api/v1/products.json?product_type=blush&price_greater_than=15")
-	// 		.then(resp => {setData(resp.data)})
-	// 		.catch(err => {
-	// 			console.dir(err)
-	// 			setError(true)
-	// 		})
-	// 		.finally(() => setLoading(false))
-	// }, [])
+	const dataIWillUse = data && data.slice(3, 36) as ProductProps[]
 
 
 	const getTotalItems = (items: CartItem[]) =>
 		items.reduce((prev: number, currentItem) => prev + currentItem.amount, 0)
 
 
-	const handleAddToCart = (itemToCart: CartItem) => {
+	const handleAddToCart = (itemToCart: CartItem, selectedColor: ProductColor) => {
+
 		setCartItems(cartItems => {
 			const isItemExistInCart = cartItems.find(item => item.id === itemToCart.id)
 			if (isItemExistInCart) {
@@ -51,6 +39,21 @@ const App = () => {
 	const handleRemoveFromCart = (id: number) => {
 
 	}
+
+	const handleSelectColor = (item: CartItem) => {
+
+	}
+
+
+	const setInitalColor = useCallback((itemId: number) => {
+		dataIWillUse!.map(prod => {
+			if (prod.id === itemId) {
+				if (prod.product_colors && prod.product_colors[0]) {
+					setSelectedColor(prod.product_colors[0])
+				}
+			}
+		})
+	}, [])
 
 	if (error) return <div>Something went wrong...</div>
 	return (
@@ -74,9 +77,12 @@ const App = () => {
 						</Badge>
 					</StyledButton>
 					<Grid container spacing={3}>
-						{data && data.slice(3, 36).map(item =>
-							item.image_link && <Grid item key={item.id} xs={12} sm={4}>
-                <Product item={item} handleAddToCart={handleAddToCart}/>
+
+						{dataIWillUse!.map(item =>
+							item.image_link &&
+              <Grid item key={item.id} xs={12} sm={4}>
+                <Product item={item}
+                         handleAddToCart={handleAddToCart}/>
               </Grid>
 						)}
 					</Grid>
@@ -86,4 +92,21 @@ const App = () => {
 	)
 }
 
-export default App
+export default App;
+
+
+// const [loading, setLoading] = useState(false)
+// const [_data, setData] = useState<ProductProps[]>([])
+// const [_error, setError] = useState(false)
+// useEffect(() => {
+// 	setLoading(true)
+// 	axios
+// 		.get<ProductProps[]>("https://makeup-api.herokuapp.com/api/v1/products.json?product_type=blush&price_greater_than=15")
+// 		.then(resp => {setData(resp.data)})
+// 		.catch(err => {
+// 			console.dir(err)
+// 			setError(true)
+// 		})
+// 		.finally(() => setLoading(false))
+// }, [])
+

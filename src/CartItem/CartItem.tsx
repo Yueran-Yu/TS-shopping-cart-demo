@@ -24,7 +24,7 @@ const CartItem: FC<CartItemProps> = ({item, addToCart, removeFormCart}) => {
 						size="small"
 						disableElevation
 						variant="contained"
-						onClick={() => addToCart(item)}>+
+						onClick={() => addToCart(item,item.product_color)}>+
 					</Button>
 				</div>
 			</div>
