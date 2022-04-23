@@ -25,8 +25,9 @@ const App = () => {
 		items.reduce((prev: number, currentItem) => prev + currentItem.amount, 0)
 
 
-	const handleAddToCart = (itemToCart: CartItem, selectedColor: ProductColor) => {
-
+	const handleAddToCart = (itemToCart: CartItem) => {
+		console.log("ssfsfwewefwgwege")
+		console.log(itemToCart)
 		setCartItems(cartItems => {
 			const isItemExistInCart = cartItems.find(item => item.id === itemToCart.id)
 			if (isItemExistInCart) {

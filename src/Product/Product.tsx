@@ -1,4 +1,4 @@
-import React, {FC, MouseEvent, useEffect, useRef, useState} from 'react';
+import React, {FC, MouseEvent, useEffect, useMemo, useState} from 'react';
 import {AddItemBtn, ColorBox, ColorContainer, ColorText, ItemContainer} from './Product.styles';
 import ReadMore from "../ReadMore/ReadMore";
 
@@ -8,12 +8,28 @@ const Product: FC<ItemProps> = ({item, handleAddToCart}) => {
 		const [hasColor,] = useState(item.product_colors.length > 0)
 		const [hovered, setHovered] = useState<boolean>(false)
 
+		const setCartItem = (p: ProductColor) => {
+			return {
+				id: item.id,
+				category: item.category,
+				name: item.name,
+				description: item.description,
+				image_link: item.image_link,
+				price: item.price,
+				amount: item.amount,
+				product_color: p
+			}
+		}
+		const initCartItemMemo = useMemo(() => setCartItem(selectedColor), [setCartItem,selectedColor])
+
+
 		useEffect(() => {
 			if (item.product_colors && item.product_colors[0]) {
 				setHoverColor(item.product_colors[0])
 				setSelectedColor(item.product_colors[0])
+
 			}
-		}, [])
+		}, [item.product_colors])
 
 		const handleMouseEnter = (e: MouseEvent<HTMLSpanElement>, hex: string) => {
 			if (e.currentTarget && e.currentTarget.getAttribute('name') === hex) {
@@ -37,10 +53,8 @@ const Product: FC<ItemProps> = ({item, handleAddToCart}) => {
 					hex_value: e.currentTarget.getAttribute('name')!,
 					colour_name: e.currentTarget.getAttribute('value')!
 				})
-			} else {
 			}
 		}
-
 
 		return (
 			<ItemContainer>
@@ -72,7 +86,7 @@ const Product: FC<ItemProps> = ({item, handleAddToCart}) => {
 					</ColorContainer>
 					<h3>${item.price}</h3>
 				</div>
-				<AddItemBtn>Add to cart</AddItemBtn>
+				<AddItemBtn onClick={() => handleAddToCart(initCartItemMemo)}>Add to cart</AddItemBtn>
 			</ItemContainer>
 		);
 	}

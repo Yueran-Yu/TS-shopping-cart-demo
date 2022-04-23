@@ -10,9 +10,7 @@ interface ProductsBaseProps {
 	description: string
 	image_link: string
 	price: number
-	price_sign: string
 	amount: number
-	brand: string
 }
 
 interface CartItem extends ProductsBaseProps {
@@ -25,7 +23,7 @@ interface ProductProps extends ProductsBaseProps {
 
 type ItemProps = {
 	item: ProductProps
-	handleAddToCart: (addItemToCart: CartItem, selectedColor: ProductColor) => void
+	handleAddToCart: (addItemToCart: CartItem) => void
 	// handleMouseEnter: (e: React.MouseEvent<HTMLSpanElement>, hex: string) => void
 	// handleMouseLeave: () => void
 	// handleOnClickColor: () => void
@@ -43,7 +41,7 @@ interface StyledHasColor {
 }
 
 interface CartFunctionsProps {
-	addToCart: (selectedItem: CartItem, selectedColor: ProductColor) => void
+	addToCart: (selectedItem: CartItem) => void
 	removeFormCart: (id: number) => void
 }
 

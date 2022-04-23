@@ -63,10 +63,10 @@ export const ColorBox = styled.span<StyledProductColor>`
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  margin: 5px 4px 3px 4px;
+  margin: 5px 6px 3px 6px;
   cursor: pointer;
   background-color: ${({name}) => name};
-  outline: ${({selected, hovered}) => selected ? "solid 2px black" : (hovered ? "solid 2px green" : "none")};
+  outline: ${({selected, hovered}) => selected ? "solid 2px grey" : (hovered ? "solid 2px orange" : "none")};
   outline-offset: 3px;
 
 `
