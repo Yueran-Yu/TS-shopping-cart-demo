@@ -1,8 +1,12 @@
 import React, {FC} from 'react';
 import Button from "@material-ui/core/Button"
 import {CartItemContainer} from './CartItem.styles';
+import {useProductContext} from "../Context/ContextProvider";
 
-const CartItem: FC<CartItemProps> = ({item, addToCart, removeFormCart}) => {
+
+const CartItem: FC<CartItemProps> = ({item}) => {
+	const {handleAddToCart, handleRemoveFromCart} = useProductContext()
+
 	return (
 		<CartItemContainer>
 			<div>
@@ -17,14 +21,14 @@ const CartItem: FC<CartItemProps> = ({item, addToCart, removeFormCart}) => {
 						size="small"
 						disableElevation
 						variant="contained"
-						onClick={() => removeFormCart(item.id, item.product_color)}>-
+						onClick={() => handleRemoveFromCart(item.id, item.product_color)}>-
 					</Button>
 					<p>{item.amount}</p>
 					<Button
 						size="small"
 						disableElevation
 						variant="contained"
-						onClick={() => addToCart(item)}>+
+						onClick={() => handleAddToCart(item)}>+
 					</Button>
 				</div>
 			</div>
